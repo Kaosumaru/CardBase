@@ -31,7 +31,7 @@ public class GenericCardList<CardLogicChild> : CardBaseList where CardLogicChild
     static protected void LoadCardsByReflection()
     {
         Type parentType = typeof(CardLogicChild);
-        Assembly assembly = Assembly.GetExecutingAssembly();
+        Assembly assembly = Assembly.GetCallingAssembly();
         Type[] types = assembly.GetTypes();
         IEnumerable<Type> subclasses = types.Where(t => t.IsSubclassOf(parentType));
 

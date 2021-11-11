@@ -31,21 +31,48 @@ public class CardLogicBase
     }
 
     // -----------------------------------------
-    // Utils
+    // DECK
     // -----------------------------------------
 
-
-    virtual public void AddedToDeck(Card card, Card deck, bool addedNow)
+    // this is called when card is added to deck.
+    // addedNow means that card was just added, if not it started in this deck from beginning
+    // (after game start or deserialization)
+    public void AddedToDeck(Card card, Card deck, bool addedNow)
     {
-        AddListenersAfterCardInPlay(card, deck);
+        foreach (var child in card.Children)
+        {
+            BaseLogic(child).AddedToDeck(child, card, addedNow);
+        }
+
+        AddListener(card, card.OnChildCardAdded, (args) => { OnCardAdded(args, card); });
+        AddListener(card, card.OnChildCardRemoved, OnCardRemoved);
+        OnAddedToDeck(card, deck, addedNow);
+    }
+
+    protected virtual void OnAddedToDeck(Card card, Card deck, bool addedNow)
+    {
+
+    }
+
+    void OnCardAdded(CardAddedEventArgs args, Card deck)
+    {
+        BaseLogic(args.Card).AddedToDeck(args.Card, deck, true);
+    }
+
+    void OnCardRemoved(CardRemovedEventArgs args)
+    {
+        BaseLogic(args.Card).RemoveListenersAfterCardRemovedFromPlay(args.Card);
+    }
+
+    CardLogicBase BaseLogic(Card card)
+    {
+        return CardBaseList.GetBaseLogic(card.id);
     }
 
 
-    // helpers for adding listeners for active effects
-    virtual public void AddListenersAfterCardInPlay(Card card, Card deck)
-    {
-
-    }
+    // -----------------------------------------
+    // Utils
+    // -----------------------------------------
 
     virtual public void RemoveListenersAfterCardRemovedFromPlay(Card card)
     {
