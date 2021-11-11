@@ -4,6 +4,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class Targetable
+{
+
+}
+
 public class CardLogicBase
 {
     public string id;
@@ -17,7 +22,7 @@ public class CardLogicBase
 
     virtual public IEnumerable<Targetable> AvailableTargets(Card card)
     {
-        return new List<Targetable> { GameState.Current.Board };
+        return new List<Targetable> { };
     }
 
     virtual public object[] TextVariables(Card card)
