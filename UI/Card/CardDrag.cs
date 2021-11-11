@@ -90,7 +90,7 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     void Start()
     {
-        _card = GetComponentInParent<CardView>().Card;
+        _card = GetComponentInParent<CardData>().Card;
         _image = GetComponent<Image>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
