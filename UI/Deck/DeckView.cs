@@ -25,7 +25,7 @@ public class DeckView : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         RemoveAllChildren();
         AddCards();
