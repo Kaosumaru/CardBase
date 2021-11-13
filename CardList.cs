@@ -28,10 +28,10 @@ public class GenericCardList<CardLogicChild> : CardBaseList where CardLogicChild
         return _cards;
     }
 
-    static protected void LoadCardsByReflection()
+    static protected void LoadCardsByReflection(Assembly assembly)
     {
+        if (assembly == null) return;
         Type parentType = typeof(CardLogicChild);
-        Assembly assembly = Assembly.GetCallingAssembly();
         Type[] types = assembly.GetTypes();
         IEnumerable<Type> subclasses = types.Where(t => t.IsSubclassOf(parentType));
 
@@ -39,15 +39,15 @@ public class GenericCardList<CardLogicChild> : CardBaseList where CardLogicChild
         {
             var logic = (CardLogicChild)Activator.CreateInstance(type);
             if (string.IsNullOrEmpty(logic.id)) continue;
-            AddCard(logic);
+            AddCard(logic, true);
         }
     }
 
-    static protected void AddCard(CardLogicChild logic)
+    static protected void AddCard(CardLogicChild logic, bool ignoreDuplicate = false)
     {
         Debug.Assert(logic.id != null, $"Card id is not set");
 
-        if (Application.isPlaying && _cards.ContainsKey(logic.id))
+        if (!ignoreDuplicate && Application.isPlaying && _cards.ContainsKey(logic.id))
         {
             Debug.LogWarning($"{logic.id} already added to list!");
         }
