@@ -80,7 +80,7 @@ public class DeckView : MonoBehaviour
     void OnCardRemoved(CardRemovedEventArgs args)
     {
         var cardObj = _cardToObj[args.Card];
-        Destroy(cardObj.gameObject);
+        cardObj.RequestDestroy();
         _cardToObj.Remove(args.Card);
     }
 
