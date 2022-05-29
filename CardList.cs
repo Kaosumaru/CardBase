@@ -68,4 +68,10 @@ public class GenericCardList<CardLogicChild> : CardBaseList where CardLogicChild
         _cards[name] = logic;
         _baseCards[name] = logic;
     }
+
+    static protected void Deinitialize()
+    {
+        _cards.Clear();
+        _baseCards.Clear();
+    }
 }

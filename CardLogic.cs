@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 public class Targetable
 {
@@ -116,4 +120,18 @@ public class CardLogicBase
 
         _cardCleanupQueue.Remove(c);
     }
+
+#if UNITY_EDITOR
+    static CardLogicBase()
+    {
+        EditorApplication.playModeStateChanged += PlayModeState;
+
+    }
+
+    private static void PlayModeState(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingEditMode)
+            _cardCleanupQueue.Clear();
+    }
+#endif
 }
