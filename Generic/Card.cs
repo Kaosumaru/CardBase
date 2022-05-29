@@ -38,7 +38,7 @@ public class CardMovedEvent : UnityEvent<CardMovedEventArgs>
 }
 
 [System.Serializable]
-public class Card
+public class Card : Targetable
 {
     public string id; // unique instance of card Logic
     protected Tokens tokens = new Tokens();

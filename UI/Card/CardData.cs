@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 
-public abstract class CardData : MonoBehaviour
+public class CardData : MonoBehaviour
 {
     [System.NonSerialized]
     public Card Card;
 
-    abstract public bool IsDataValid();
+    virtual public bool IsDataValid()
+    {
+        return true;
+    }
+
+    virtual public void RequestDestroy()
+    {
+        Destroy(gameObject);
+    }
 }
