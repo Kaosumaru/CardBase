@@ -10,6 +10,10 @@ public class CardBaseList
     public static CardLogicBase GetBaseLogic(string id)
     {
         _baseCards.TryGetValue(id, out var ret);
+        if (ret == null)
+        {
+            Debug.Log($"Logic for '{id}' not found");
+        }
         return ret;
     }
 }
