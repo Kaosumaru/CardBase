@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEditor;
 #endif
 
-
+[Serializable]
 public class Targetable
 {
 
