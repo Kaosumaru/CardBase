@@ -33,7 +33,7 @@ public class Tokens
     public Tokens Clone()
     {
         var res = new Tokens();
-        foreach(var entry in tokens)
+        foreach (var entry in tokens)
         {
             res.tokens[entry.Key] = new Token(entry.Value);
         }
@@ -45,6 +45,15 @@ public class Tokens
         foreach (var entry in tokens)
         {
             entry.Value.Clear();
+        }
+    }
+
+    public void ClearWhere(Func<Guid, Token, bool> condition)
+    {
+        foreach (var entry in tokens)
+        {
+            if (condition(entry.Key, entry.Value))
+                entry.Value.Clear();
         }
     }
 }

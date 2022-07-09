@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Linq.Extensions;
 using System;
-using System.Runtime.Serialization;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using UnityEngine;
 using UnityEngine.Events;
-using Linq.Extensions;
 
 public class CardAddedEventArgs : EventArgs
 {
@@ -74,6 +73,11 @@ public class Card : Targetable
     public void ClearTokens()
     {
         tokens.Clear();
+    }
+
+    public void ClearTokensWhere(Func<Guid, Token, bool> condition)
+    {
+        tokens.ClearWhere(condition);
     }
 
     public Card CreateChild(string id, Card creator = null)
