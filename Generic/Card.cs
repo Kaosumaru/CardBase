@@ -90,6 +90,13 @@ public class Card : Targetable
         return cardData;
     }
 
+    public Card Parent()
+    {
+        if (parent.TryGetTarget(out var p))
+            return p;
+        return null;
+    }
+
     public void Add(Card cardData, Card creator = null)
     {
         Card oldParent = null;
