@@ -27,7 +27,7 @@ public class Tokens
 
     public bool HasToken(Guid tokenType)
     {
-        return tokens.ContainsKey(tokenType);
+        return TokenValue(tokenType) > 0;
     }
 
     public Tokens Clone()
