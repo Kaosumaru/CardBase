@@ -36,6 +36,11 @@ namespace Linq.Extensions
         {
             return input.Where( x => !Equals(x, value) );
         }
+
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> input)
+        {
+            return input.Where(x => x != null);
+        }
     }
 }
 
