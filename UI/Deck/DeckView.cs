@@ -10,14 +10,18 @@ public class DeckView : MonoBehaviour
     // container to which add cards
     public GameObject Container;
 
-    // card representing deck that we are visualizing
-    public Card DeckCard;
-
     // scale of children (TODO - remove?)
     public float Scale = 1.0f;
 
+    // card representing deck that we are visualizing
+    private Card DeckCard;
 
     Dictionary<Card, CardData> _cardToObj = new Dictionary<Card, CardData>();
+
+    public void SetDeckCard(Card card)
+    {
+        DeckCard = card;
+    }
 
     protected virtual Card Deck()
     {
