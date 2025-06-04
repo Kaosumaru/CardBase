@@ -41,7 +41,7 @@ public class CardLogicBase
     // this is called when card is added to deck.
     // addedNow means that card was just added, if not it started in this deck from beginning
     // (after game start or deserialization)
-    public void AddedToDeck(Card card, Card deck, bool addedNow)
+    protected void AddedToDeck(Card card, Card deck, bool addedNow)
     {
         foreach (var child in card.Children)
         {
